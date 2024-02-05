@@ -4,12 +4,12 @@ const wol = require('wake_on_lan');
 class PhilipsTV {
     api = null;
     channelList = [];
-    volume = {
-        min: 0,
-        max: 0,
-        current: 0,
-        muted: false
-    };
+//    volume = {
+//        min: 0,
+//        max: 0,
+//        current: 0,
+//        muted: false
+//    };
 
     constructor(config) {
         const wolURL = config.wol_url;
@@ -159,36 +159,36 @@ class PhilipsTV {
         })
     };
 
-    getVolumeState = (callback) => {
-        this.api("audio/volume").then((data) => {
-            this.volume = {
-                ...this.volume,
-                ...data
-            };
-            const volume = Math.floor(((this.volume.current - this.volume.min) / (this.volume.max - this.volume.min)) * 100);
-            callback(null, volume)
-        }).catch(() => {
-            callback(null, false)
-        })
-    };
+//    getVolumeState = (callback) => {
+//        this.api("audio/volume").then((data) => {
+//            this.volume = {
+//                ...this.volume,
+//                ...data
+//            };
+//            const volume = Math.floor(((this.volume.current - this.volume.min) / (this.volume.max - this.volume.min)) * 100);
+//            callback(null, volume)
+//        }).catch(() => {
+//            callback(null, false)
+//        })
+//    };
 
-    setVolumeState = (value, callback) => {
-        this.volume.current = Math.round(this.volume.min + (this.volume.max - this.volume.min) * (value / 100));
-        this.api("audio/volume", this.volume).then(() => {
-            callback(null, value);
-        }).catch(() => {
-            callback(null, false)
-        });
-    };
+//    setVolumeState = (value, callback) => {
+//        this.volume.current = Math.round(this.volume.min + (this.volume.max - this.volume.min) * (value / 100));
+//        this.api("audio/volume", this.volume).then(() => {
+//            callback(null, value);
+//        }).catch(() => {
+//            callback(null, false)
+//        });
+//    };
 
-    setMuteState = (value, callback) => {
-        this.volume.muted = !value;
-        this.api("audio/volume", this.volume).then(() => {
-            callback(null, value);
-        }).catch(() => {
-            callback(null, false)
-        });
-    };
+//    setMuteState = (value, callback) => {
+//        this.volume.muted = !value;
+//        this.api("audio/volume", this.volume).then(() => {
+//            callback(null, value);
+//        }).catch(() => {
+//            callback(null, false)
+//        });
+//    };
 
     setAmbilightState = (value, callback) => {
         if (value) {
